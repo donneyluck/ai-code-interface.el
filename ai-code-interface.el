@@ -249,8 +249,6 @@ Shows the current backend label to the right."
     ("z" "Switch to AI CLI" ai-code-cli-switch-to-buffer-or-hide)
     ("s" ai-code--select-backend-description ai-code-select-backend)
     ("g" "Open backend config (eg. add mcp)" ai-code-open-backend-config)
-    ("p" "Open prompt file" ai-code-open-prompt-file)
-    ("b" "Send prompt block to AI" ai-code-prompt-send-block)
     ]
    ["AI Code Actions"
     (ai-code--infix-toggle-suffix)
@@ -264,6 +262,8 @@ Shows the current backend label to the right."
     ("r" "Refactor Code"               ai-code-refactor-book-method)
     ("t" "Test Driven Development"     ai-code-tdd-cycle)
     ("v" "Pull or Review Code Change"  ai-code-pull-or-review-diff-file)
+    ("p" "Open prompt file" ai-code-open-prompt-file)
+    ("b" "Send prompt block to AI" ai-code-prompt-send-block)
     ("!" "Run Current File" ai-code-run-current-file)
     ]
    ["Other Tools"
