@@ -68,8 +68,10 @@ with a newline separator."
   "Read a prompt from the user and send it to the AI service."
   (interactive)
   (let ((initial-input (when (use-region-p)
-                         (buffer-substring-no-properties (region-beginning)
-                                                         (region-end)))))
+                         (string-trim-right
+                          (buffer-substring-no-properties (region-beginning)
+                                                          (region-end))
+                          "\n"))))
     (when-let ((prompt (ai-code-read-string "Send to AI: " initial-input)))
       (ai-code--insert-prompt prompt))))
 
