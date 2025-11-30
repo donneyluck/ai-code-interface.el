@@ -10,7 +10,7 @@ An Emacs interface for AI-assisted software development. *The purpose is to prov
   - [[https://github.com/openai/codex][OpenAI Codex]]
   - [[https://docs.github.com/en/copilot/how-tos/use-copilot-agents/use-copilot-cli][GitHub Copilot CLI]]
   - [[https://opencode.ai/][Opencode]]
-  - [[https://github.com/xai-org/grok-cli][Grok CLI]]
+  - [[https://grokcli.io/][Grok CLI]]
 
 - I switch across different CLI based AI tool in emacs: Claude Code / Gemini CLI / Aider / OpenAI Codex. If you also use different AI tools inside emacs, but want to keep same user interface and experience, this package is for you.
 
@@ -75,10 +75,10 @@ An Emacs interface for AI-assisted software development. *The purpose is to prov
    - [[https://github.com/openai/codex][OpenAI codex CLI]] (`[[./ai-code-codex-cli.el][ai-code-codex-cli.el]]`)
    - [[https://docs.github.com/en/copilot/how-tos/use-copilot-agents/use-copilot-cli][GitHub Copilot CLI]] (`[[./ai-code-github-copilot-cli.el][ai-code-github-copilot-cli.el]]`)
    - [[https://opencode.ai/][Opencode]] (`[[./ai-code-opencode.el][ai-code-opencode.el]]`)
-   - [[https://github.com/xai-org/grok-cli][Grok CLI]] (`[[./ai-code-grok-cli.el][ai-code-grok-cli.el]]`)
+   - [[https://grokcli.io/][Grok CLI]] (`[[./ai-code-grok-cli.el][ai-code-grok-cli.el]]`)
 
 **** Grok CLI setup
-     Install [[https://github.com/xai-org/grok-cli][grok-cli]] and ensure the `grok` executable is on your PATH.
+     Install [[https://grokcli.io/][grok-cli]] and ensure the `grok` executable is on your PATH.
      Customize `grok-cli-program` or `grok-cli-program-switches` if you want to
      point at a different binary or pass additional flags (for example,
      selecting a profile). After that, select the backend through
