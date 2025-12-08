@@ -247,8 +247,9 @@ Returns non-nil if the action is handled and the caller should exit."
 (defun ai-code--implement-todo--handle-blank-line ()
   "Handle insertion of a TODO comment when on a blank line.
 Returns non-nil if handled and the caller should exit."
+  ;; (interactive)
   (when (and (not (region-active-p))
-             (string-blank-p (thing-at-point 'line t))
+             (or (not (thing-at-point 'line t)) (string-blank-p (thing-at-point 'line t)))
              comment-start)
     (let ((todo-text (ai-code-read-string "Enter TODO comment: "))
           (comment-prefix (if (eq major-mode 'emacs-lisp-mode)
