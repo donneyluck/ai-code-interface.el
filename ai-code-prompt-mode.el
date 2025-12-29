@@ -1,4 +1,4 @@
-;;; ai-code-prompt-mode.el --- AI code prompt mode for editing AI prompt files -*- lexical-binding: t; -*-
+;;; ai-code-prompt-mode.el --- Unified interface for multiple AI coding CLI tool -*- lexical-binding: t; -*-
 
 ;; Author: Kang Tu <tninja@gmail.com>
 
