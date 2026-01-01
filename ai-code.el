@@ -1,7 +1,7 @@
 ;;; ai-code.el --- Unified interface for multiple AI coding CLI tool -*- lexical-binding: t; -*-
 
 ;; Author: Kang Tu <tninja@gmail.com>
-;; Version: 0.73
+;; Version: 0.74
 ;; Package-Requires: ((emacs "26.1") (transient "0.8.0") (magit "2.1.0"))
 ;; URL: https://github.com/tninja/ai-code-interface.el
 
@@ -162,7 +162,7 @@ Shows the current backend label to the right."
     ("c" "Code change (C-u: clipboard)" ai-code-code-change)
     ("i" "Implement TODO (C-u: clipboard)" ai-code-implement-todo)
     ("q" "Ask question (C-u: clipboard)" ai-code-ask-question)
-    ("x" "Explain code" ai-code-explain)
+    ("x" "Explain code in scope" ai-code-explain)
     ("<SPC>" "Send command (C-u: clipboard)" ai-code-send-command)
     ("@" "Add context (C-u: clear)" ai-code-context-action)
     ]
@@ -173,6 +173,7 @@ Shows the current backend label to the right."
     ("p" "Open prompt file" ai-code-open-prompt-file)
     ("b" "Send prompt block to AI" ai-code-prompt-send-block)
     ("!" "Run Current File or Command" ai-code-run-current-file-or-shell-cmd)
+    ("I" "Insert function name at point" ai-code-insert-function-at-point)
     ]
    ["Other Tools"
     ("." "Init projectile and gtags" ai-code-init-project)

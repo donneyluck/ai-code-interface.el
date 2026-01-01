@@ -12,6 +12,7 @@
 ;;; Code:
 
 (require 'cl-lib)  ; For `cl-subseq`
+(require 'imenu)
 
 (declare-function helm-comp-read "helm-mode" (prompt collection &rest args))
 
@@ -118,6 +119,44 @@ The current buffer's file is always first."
       (if sorted-files
           (concat "\nFiles:\n" (mapconcat #'identity sorted-files "\n"))
         ""))))
+
+(defun ai-code--flatten-imenu-index (index)
+  "Flatten imenu INDEX alist into a list of strings."
+  (let (result)
+    (dolist (item index)
+      (when (consp item)
+        (let ((name (car item))
+              (payload (cdr item)))
+          (cond
+           ((and (listp payload) (consp (car payload)))
+            ;; Nested list (category or sub-index)
+            (setq result (append result (ai-code--flatten-imenu-index payload))))
+           ((stringp name)
+            (push name result))))))
+    result))
+
+(defun ai-code--get-functions-from-buffer (buffer)
+  "Get a list of function/symbol names from BUFFER using imenu."
+  (with-current-buffer buffer
+    (when (derived-mode-p 'prog-mode)
+      (condition-case nil
+          (let ((imenu-auto-rescan t)
+                (index (imenu--make-index-alist t)))
+            (ai-code--flatten-imenu-index index))
+        (error nil)))))
+
+;;;###autoload
+(defun ai-code-insert-function-at-point ()
+  "Insert a function name selected from current windows' prog-mode buffers."
+  (interactive)
+  (let ((functions nil))
+    (dolist (window (window-list))
+      (let ((buffer (window-buffer window)))
+        (setq functions (append (ai-code--get-functions-from-buffer buffer) functions))))
+    (setq functions (sort (delete-dups (cl-remove-if-not #'stringp functions)) #'string<))
+    (let ((selected (completing-read "Insert function: " functions nil nil)))
+      (when (and selected (not (string-empty-p selected)))
+        (insert selected)))))
 
 (provide 'ai-code-input)
 ;;; ai-code-input.el ends here
