@@ -2,6 +2,10 @@
 
 * AI Code Interface
 
+[[https://melpa.org/#/ai-code][https://melpa.org/packages/ai-code-badge.svg]]
+[[https://stable.melpa.org/#/ai-code][https://stable.melpa.org/packages/ai-code-badge.svg]]
+[[https://github.com/tninja/ai-code.el/graphs/contributors][https://img.shields.io/github/contributors/tninja/ai-code.el.svg]]
+
 An Emacs interface for AI-assisted software development. *The purpose is to provide a uniform interface and experience for different AI backend*. It is also designed to integrate seamlessly with AI-driven agile development workflow.
 
 - Current it support these AI coding CLI:
