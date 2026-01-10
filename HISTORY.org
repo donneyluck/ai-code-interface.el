@@ -2,6 +2,10 @@
 * Release history
 
 ** Main branch change
+
+** 0.82
+- Chore: ai-code-take-notes prioritize to put note to visible org buffers in current frame
+  - Refactor ai-code-take-notes to smaller functions
 - Feat: Support cross git repo context adding 
 - Chore: Add __pycache__ to default gitignore file patterns
 
