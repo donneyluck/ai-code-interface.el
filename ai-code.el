@@ -1,8 +1,8 @@
-;;; ai-code.el --- Unified interface for AI coding CLI tool such as Codex, Copilot CLI, Opencode, Grok CLI, etc -*- lexical-binding: t; -*-
+;;; ai-code.el --- Unified interface for AI coding CLI such as Codex, Copilot CLI, Opencode, Grok CLI, etc -*- lexical-binding: t; -*-
 
 ;; Author: Kang Tu <tninja@gmail.com>
-;; Version: 0.82
-;; Package-Requires: ((emacs "26.1") (transient "0.8.0") (magit "2.1.0"))
+;; Version: 0.90
+;; Package-Requires: ((emacs "28.1") (transient "0.8.0") (magit "2.1.0"))
 ;; URL: https://github.com/tninja/ai-code-interface.el
 
 ;; SPDX-License-Identifier: Apache-2.0
@@ -23,10 +23,9 @@
 ;;   - Opencode
 ;;   - Grok CLI
 ;;
-;; Dependency: claude-code.el (https://github.com/stevemolitor/claude-code.el) are
-;; used as infrastructure (eat / vterm integration) for OpenAI Codex,
-;; GitHub Copilot CLI, Opencode, and Grok CLI backends. So it is
-;; required to install claude-code.el when using those backends.
+;; Dependency: ai-code-backends-infra.el provides shared terminal infrastructure
+;; (eat / vterm integration, which need to be installed) for OpenAI
+;; Codex,  GitHub Copilot CLI, Opencode, and Grok CLI backends.
 ;;
 ;; Many features are ported from aider.el, making it a powerful alternative for
 ;; developers who wish to switch between modern AI coding CLIs while keeping
@@ -263,4 +262,3 @@ typically in your Emacs configuration with:
 (provide 'ai-code)
 
 ;;; ai-code.el ends here
-

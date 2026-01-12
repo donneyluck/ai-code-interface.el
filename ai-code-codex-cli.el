@@ -5,25 +5,16 @@
 
 ;;; Commentary:
 ;;
-;; Thin wrapper that reuses `claude-code' to run Codex CLI.
+;; Thin wrapper that reuses `ai-code-backends-infra' to run Codex CLI.
 ;; Provides interactive commands and aliases for the AI Code suite.
 ;;
 ;;; Code:
 
 (require 'ai-code-backends)
-
-(declare-function claude-code "claude-code" (&optional arg))
-(declare-function claude-code--start "claude-code" (arg extra-switches &optional force-prompt force-switch-to-buffer))
-(declare-function claude-code--term-send-string "claude-code" (backend string))
-(declare-function claude-code--do-send-command "claude-code" (cmd))
-(declare-function claude-code-switch-to-buffer "claude-code")
-(defvar claude-code-terminal-backend)
-(defvar claude-code-program)
-(defvar claude-code-program-switches)
-
+(require 'ai-code-backends-infra)
 
 (defgroup ai-code-codex-cli nil
-  "Codex CLI integration via `claude-code'."
+  "Codex CLI integration via `ai-code-backends-infra'."
   :group 'tools
   :prefix "ai-code-codex-cli-")
 
@@ -37,42 +28,64 @@
   :type '(repeat string)
   :group 'ai-code-codex-cli)
 
+(defvar ai-code-codex-cli--processes (make-hash-table :test 'equal)
+  "Hash table mapping directory roots to their Codex processes.")
+
 ;;;###autoload
 (defun ai-code-codex-cli (&optional arg)
-  "Start Codex (reuses `claude-code' startup logic).
-ARG is passed to `claude-code'."
+  "Start Codex (uses `ai-code-backends-infra' logic).
+ARG is currently unused but kept for compatibility."
   (interactive "P")
-  (let ((claude-code-program ai-code-codex-cli-program)
-        (claude-code-program-switches ai-code-codex-cli-program-switches))
-    (claude-code arg)))
+  (let* ((working-dir (ai-code-backends-infra--session-working-directory))
+         (buffer-name (ai-code-backends-infra--session-buffer-name "codex" working-dir))
+         (command (concat ai-code-codex-cli-program " "
+                          (mapconcat 'identity ai-code-codex-cli-program-switches " "))))
+    (ai-code-backends-infra--toggle-or-create-session
+     working-dir
+     buffer-name
+     ai-code-codex-cli--processes
+     command
+     #'ai-code-codex-cli-send-escape
+     (lambda ()
+       (ai-code-backends-infra--cleanup-session
+        working-dir
+        buffer-name
+        ai-code-codex-cli--processes)))))
 
 ;;;###autoload
 (defun ai-code-codex-cli-switch-to-buffer ()
   "Switch to the Codex CLI buffer."
   (interactive)
-  (claude-code-switch-to-buffer))
+  (let* ((working-dir (ai-code-backends-infra--session-working-directory))
+         (buffer-name (ai-code-backends-infra--session-buffer-name "codex" working-dir)))
+    (ai-code-backends-infra--switch-to-session-buffer
+     buffer-name
+     "No Codex session for this project")))
 
 ;;;###autoload
 (defun ai-code-codex-cli-send-command (line)
-  "Send LINE to Codex CLI programmatically or interactively.
-When called interactively, prompts for the command.
-When called from Lisp code, sends LINE directly without prompting."
+  "Send LINE to Codex CLI."
   (interactive "sCodex> ")
-  (claude-code--do-send-command line))
+  (let* ((working-dir (ai-code-backends-infra--session-working-directory))
+         (buffer-name (ai-code-backends-infra--session-buffer-name "codex" working-dir)))
+    (ai-code-backends-infra--send-line-to-session
+     buffer-name
+     "No Codex session for this project"
+     line)))
+
+;;;###autoload
+(defun ai-code-codex-cli-send-escape ()
+  "Send escape key to Codex CLI."
+  (interactive)
+  (ai-code-backends-infra--terminal-send-escape))
 
 ;;;###autoload
 (defun ai-code-codex-cli-resume (&optional arg)
-  "Resume a previous Codex CLI session.
-ARG is passed to the underlying start function."
+  "Resume a previous Codex CLI session."
   (interactive "P")
-  (let ((claude-code-program ai-code-codex-cli-program)
-        (claude-code-program-switches ai-code-codex-cli-program-switches))
-    (claude-code--start arg '("resume") nil t)
-    (claude-code--term-send-string claude-code-terminal-backend "")
-    (with-current-buffer claude-code-terminal-backend
-      (goto-char (point-min)))))
+  (let ((ai-code-codex-cli-program-switches (append ai-code-codex-cli-program-switches '("resume"))))
+    (ai-code-codex-cli arg)))
 
 (provide 'ai-code-codex-cli)
 
 ;;; ai-code-codex-cli.el ends here
-
