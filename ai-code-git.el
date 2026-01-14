@@ -293,13 +293,17 @@ without generating file."
         (progn
           (ai-code--open-git-web-compare start end)
           nil)  ; Return nil since no file was generated
-      (let* ((name      (format "%s..%s" start end))
-             (file      (expand-file-name (concat name ".diff") git-root))
+      ;; Sanitize branch names for file path (replace "/" with "-")
+      (let* ((name-sanitized (concat (replace-regexp-in-string "/" "-" start)
+                                     ".."
+                                     (replace-regexp-in-string "/" "-" end)))
+             (file      (expand-file-name (concat name-sanitized ".diff") git-root))
              ;; reuse branch-range plumbing (it will fetch and verify)
              (params    (list :type 'branch-range
                               :base-branch start
                               :feature-branch end
-                              :diff-file-name-part name)))
+                              :branch-scope 'remote  ; commit-range uses resolved refs
+                              :diff-file-name-part name-sanitized)))
         (ai-code--generate-branch-or-commit-diff params file)
         file))))
 
