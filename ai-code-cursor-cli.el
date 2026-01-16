@@ -83,7 +83,7 @@ ARG is currently unused but kept for compatibility."
 (defun ai-code-cursor-cli-resume (&optional arg)
   "Resume a previous Cursor CLI session."
   (interactive "P")
-  (let ((ai-code-cursor-cli-program-switches (append ai-code-cursor-cli-program-switches '("--resume"))))
+  (let ((ai-code-cursor-cli-program-switches (append ai-code-cursor-cli-program-switches '("resume"))))
     (ai-code-cursor-cli arg)
     ;; Send empty string to trigger terminal processing and ensure CLI session picker appears
     (let* ((working-dir (ai-code-backends-infra--session-working-directory))

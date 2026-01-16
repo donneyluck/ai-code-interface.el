@@ -195,8 +195,8 @@ Shows the current backend label to the right."
     ("s" ai-code-select-backend :description ai-code--select-backend-description)
     ("u" "Install / Upgrade AI CLI" ai-code-upgrade-backend)
     ("g" "Open backend config (eg. add mcp)" ai-code-open-backend-config)
-    ("|" "Apply prompt on file" ai-code-apply-prompt-on-current-file)
-    ]
+    ("|" "Apply prompt on file" ai-code-apply-prompt-on-current-file)]
+
    ["AI Code Actions"
     (ai-code--infix-toggle-suffix)
     ("c" "Code change (C-u: clipboard)" ai-code-code-change)
@@ -204,8 +204,8 @@ Shows the current backend label to the right."
     ("q" "Ask question (C-u: clipboard)" ai-code-ask-question)
     ("x" "Explain code in scope" ai-code-explain)
     ("<SPC>" "Send command (C-u: clipboard)" ai-code-send-command)
-    ("@" "Add context (C-u: clear)" ai-code-context-action)
-    ]
+    ("@" "Add context (C-u: clear)" ai-code-context-action)]
+
    ["AI Agile Development"
     ("r" "Refactor Code"               ai-code-refactor-book-method)
     ("t" "Test Driven Development"     ai-code-tdd-cycle)
@@ -214,8 +214,8 @@ Shows the current backend label to the right."
     ("b" "Send prompt block to AI" ai-code-prompt-send-block)
     ("!" "Run Current File or Command" ai-code-run-current-file-or-shell-cmd)
     ("B" "Build project"               ai-code-build-project)
-    ("I" "Insert function name at point" ai-code-insert-function-at-point)
-    ]
+    ("I" "Insert function name at point" ai-code-insert-function-at-point)]
+
    ["Other Tools"
     ("." "Init projectile and gtags" ai-code-init-project)
     ("e" "Debug exception (C-u: clipboard)" ai-code-investigate-exception)
@@ -224,9 +224,9 @@ Shows the current backend label to the right."
     ("d" "Toggle current buffer dedicated" ai-code-toggle-current-buffer-dedicated)
     ;; ("o" "Open Clipboard file dir" ai-code-open-clipboard-file-path-as-dired)
     ("m" "Debug python MCP server" ai-code-debug-mcp)
-    ("n" "Take notes from AI session region" ai-code-take-notes)
-    ]
-   ])
+    ("n" "Take notes from AI session region" ai-code-take-notes)]])
+
+
 
 ;; When in a special buffer (e.g., *claude-code*) and using evil-mode,
 ;; pressing SPC in normal state will send the prompt.
