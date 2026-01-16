@@ -15,6 +15,7 @@ An Emacs interface for AI-assisted software development. *The purpose is to prov
   - [[https://docs.github.com/en/copilot/how-tos/use-copilot-agents/use-copilot-cli][GitHub Copilot CLI]]
   - [[https://opencode.ai/][Opencode]]
   - [[https://grokcli.io/][Grok CLI]]
+  - [[https://docs.cursor.com/en/cli][Cursor CLI]]
 
 - I switch between different CLI-based AI tools in Emacs: Claude Code / Gemini CLI / Aider / OpenAI Codex. If you also use different AI tools inside Emacs, but want to keep the same user interface and experience, this package is for you.
 
@@ -43,12 +44,12 @@ Enable installation of packages from MELPA by adding an entry to package-archive
 #+begin_src emacs-lisp
   (use-package ai-code
     :config
-    ;; use codex as backend, other options are 'gemini, 'github-copilot-cli, 'opencode, 'grok, 'claude-code-ide, 'claude-code
+    ;; use codex as backend, other options are 'gemini, 'github-copilot-cli, 'opencode, 'grok, 'claude-code-ide, 'claude-code, 'cursor
     (ai-code-set-backend 'codex)
     ;; Enable global keybinding for the main menu
     (global-set-key (kbd "C-c a") #'ai-code-menu)
     ;; Optional: Use eat if you prefer, by default it is vterm
-    ;; (setq ai-code-backends-infra-terminal-backend 'eat) ;; for openai codex, github copilot cli, opencode, grok; for claude-code-ide.el, you can check their config
+    ;; (setq ai-code-backends-infra-terminal-backend 'eat) ;; for openai codex, github copilot cli, opencode, grok, cursor-cli; for claude-code-ide.el, you can check their config
     ;; Optional: Turn on auto-revert buffer, so that the AI code change automatically appears in the buffer
     (global-auto-revert-mode 1)
     (setq auto-revert-interval 1) ;; set to 1 second for faster update
@@ -63,12 +64,12 @@ Enable installation of packages from MELPA by adding an entry to package-archive
   (use-package ai-code
     :straight (:host github :repo "tninja/ai-code-interface.el")
     :config
-    ;; use codex as backend, other options are 'gemini, 'github-copilot-cli, 'opencode, 'grok, 'claude-code-ide, 'claude-code
+    ;; use codex as backend, other options are 'gemini, 'github-copilot-cli, 'opencode, 'grok, 'claude-code-ide, 'claude-code, 'cursor
     (ai-code-set-backend 'codex)
     ;; Enable global keybinding for the main menu
     (global-set-key (kbd "C-c a") #'ai-code-menu)
     ;; Optional: Use eat if you prefer, by default it is vterm
-    ;; (setq ai-code-backends-infra-terminal-backend 'eat) ;; for openai codex, github copilot cli, opencode, grok; for claude-code-ide.el, you can check their config
+    ;; (setq ai-code-backends-infra-terminal-backend 'eat) ;; for openai codex, github copilot cli, opencode, grok, cursor-cli; for claude-code-ide.el, you can check their config
     ;; Optional: Turn on auto-revert buffer, so that the AI code change automatically appears in the buffer
     (global-auto-revert-mode 1)
     (setq auto-revert-interval 1) ;; set to 1 second for faster update
@@ -148,6 +149,7 @@ The generated prompt will include the function/region scope, visible file list, 
    - [[https://docs.github.com/en/copilot/how-tos/use-copilot-agents/use-copilot-cli][GitHub Copilot CLI]] (`[[./ai-code-github-copilot-cli.el][ai-code-github-copilot-cli.el]]`)
    - [[https://opencode.ai/][Opencode]] (`[[./ai-code-opencode.el][ai-code-opencode.el]]`)
    - [[https://grokcli.io/][Grok CLI]] (`[[./ai-code-grok-cli.el][ai-code-grok-cli.el]]`)
+   - [[https://docs.cursor.com/en/cli][Cursor CLI]] (`[[./ai-code-cursor-cli.el][ai-code-cursor-cli.el]]`)
 
 **** Grok CLI setup
      Install [[https://grokcli.io/][grok-cli]] and ensure the `grok` executable is on your PATH.

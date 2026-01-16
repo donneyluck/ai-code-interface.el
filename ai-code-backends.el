@@ -113,7 +113,17 @@ When called from Lisp code, sends CMD directly without prompting."
      :resume  ai-code-grok-cli-resume
      :config  "~/.config/grok/config.json"
      :upgrade "bun add -g @vibe-kit/grok-cli"
-     :cli     "grok"))
+     :cli     "grok")
+    (cursor
+     :label "Cursor CLI"
+     :require ai-code-cursor-cli
+     :start   ai-code-cursor-cli
+     :switch  ai-code-cursor-cli-switch-to-buffer
+     :send    ai-code-cursor-cli-send-command
+     :resume  ai-code-cursor-cli-resume
+     :config  "~/.cursor"
+     :upgrade "cursor-agent update"
+     :cli     "cursor-agent"))
   "Available AI backends and how to integrate with them.
 Each entry is (KEY :label STRING :require FEATURE :start FN :switch FN
 :send FN :resume FN-or-nil :upgrade STRING-or-nil :cli STRING).
