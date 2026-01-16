@@ -1,6 +1,6 @@
 ;;; ai-code-cursor-cli.el --- Thin wrapper for Cursor CLI  -*- lexical-binding: t; -*-
 
-;; Author: Kang Tu <tninja@gmail.com>
+;; Author: donneyluck <donneyluck@gmail.com>
 ;; SPDX-License-Identifier: Apache-2.0
 
 ;;; Commentary:
